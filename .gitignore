@@ -8,5 +8,7 @@
 *.war
 *.ear
 
+*/target/*
 ./.project
-./settings
+./settings*
+.*
