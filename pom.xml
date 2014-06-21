@@ -2,20 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                               http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.github.homepy.cyf</groupId>
-  <artifactId>cyf</artifactId>
+  <groupId>com.github.homepy.meow</groupId>
+  <artifactId>meow</artifactId>
   <packaging>pom</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>Maven Project 4 cyf</name>
+  <name>Maven Project 4 meow</name>
 
   <modules>
-    <module>cyf-base</module>
-    <module>cyf-webapp</module>
+    <module>meow-base</module>
+    <module>meow-webapp</module>
+    <module>meow-batch</module>
   </modules>
 
   <!-- Shared version number properties -->
   <properties>
-    <org.springframework.version>3.2.6.RELEASE</org.springframework.version>
+    <org.springframework.version>3.2.8.RELEASE</org.springframework.version>
   </properties>
 
 
@@ -230,8 +231,8 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.1</version>
           <configuration>
-            <source>1.7</source>
-            <target>1.7</target>
+            <source>1.6</source>
+            <target>1.6</target>
           </configuration>
         </plugin>
 
