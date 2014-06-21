@@ -1,4 +1,5 @@
 Meow? Someone likes cats. Haha~
+Here is just an empty maven project.
 
 
 src/main/java	Application/Library sources
