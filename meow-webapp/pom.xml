@@ -26,8 +26,6 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>cyf-webapp</finalName>
-    
-
+    <finalName>meow-webapp</finalName>
   </build>
 </project>

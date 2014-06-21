@@ -1,4 +1,4 @@
-package com.github.homepy.cyf;
+package com.github.homepy.meow;
 
 /**
  * Hello world!
