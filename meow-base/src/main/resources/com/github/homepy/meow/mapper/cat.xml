@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.homepy.meow.mapper.CatMapper">
+  <select id="selectCat" resultType="com.github.homepy.meow.pojo.Cat">
+    select * from cat where name
+    = #{name}
+  </select>
+
+  <insert id="insertCat" parameterType="com.github.homepy.meow.pojo.Cat">
+    insert into
+    cat(name,ins_time,ins_name,color) values
+    (#{name},now(),#{color},#{insName})
+  </insert>
+
+  <update id="updateCat">
+    update cat set name = #{name},color =
+    #{password},upd_name = #{updName} where name = #{name}
+  </update>
+
+  <delete id="deleteCat">
+    delete from cat where name = #{name}
+  </delete>
+
+</mapper>

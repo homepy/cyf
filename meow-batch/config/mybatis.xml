@@ -24,21 +24,13 @@
   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="dataSource" ref="dataSource" />
     <property name="configLocation" value="file:config/mybatis-config.xml" />
-    <property name="mapperLocations" value="classpath*:mybatis/mapper/*.xml" />
+    <property name="mapperLocations"
+      value="classpath*:com/github/homepy/meow/mapper/*.xml" />
   </bean>
 
-
-
-
-  <bean id="mutiThreadJob" class="com.github.homepy.meow.job.MutiThreadJob">
-    <constructor-arg name="threadSize" value="20" />
-  </bean>
-
-  <bean id="mutiThreadJobDetail"
-    class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-    <property name="targetObject" ref="mutiThreadJob" />
-    <property name="targetMethod" value="doCallableTask" />
-    <property name="concurrent" value="false" />
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="com.github.homepy.meow.mapper" />
+    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
   </bean>
 
 </beans>
