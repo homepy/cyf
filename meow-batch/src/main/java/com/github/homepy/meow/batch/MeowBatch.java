@@ -12,7 +12,7 @@ public class MeowBatch {
 	public static void main(String[] args) {
 		log.info("Starting MeowBatch...");
 		String[] locations = { "config/applicationContext.xml", "config/quartz.xml"};
-		@SuppressWarnings("unused")
+		@SuppressWarnings({ "unused", "resource" })
 		ApplicationContext ac = new FileSystemXmlApplicationContext(locations);
 	}
 

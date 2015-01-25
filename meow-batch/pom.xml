@@ -30,7 +30,7 @@
 		
 		<dependency>
 			<groupId>com.github.homepy.meow</groupId>
-			<artifactId>meow-cql</artifactId>
+			<artifactId>meow-cassandra</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

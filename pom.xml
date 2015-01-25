@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.homepy.meow</groupId>
 	<artifactId>meow</artifactId>
@@ -11,10 +10,10 @@
 	<modules>
 		<module>meow-base</module>
 		<module>meow-mybatis</module>
-		<module>meow-cql</module>
+		<module>meow-cassandra</module>
 		<module>meow-webapp</module>
 		<module>meow-batch</module>
-	</modules>
+  </modules>
 
 	<!-- Shared version number properties -->
 	<properties>
@@ -83,13 +82,8 @@
 			<version>2.4</version>
 		</dependency>
 
-<!-- 
-		<dependency>
-			<groupId>org.gedcom4j</groupId>
-			<artifactId>gedcom4j</artifactId>
-			<version>2.1.9</version>
-		</dependency>
- -->
+		<!-- <dependency> <groupId>org.gedcom4j</groupId> <artifactId>gedcom4j</artifactId> 
+			<version>2.1.9</version> </dependency> -->
 
 
 		<!-- Core utilities used by other modules. Define this if you use Spring 
@@ -221,6 +215,34 @@
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>2.7</version>
 				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.4</version>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>jar-no-fork</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>2.10</version>
+					<executions>
+						<execution>
+							<id>attach-javadocs</id>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 				<plugin>
 					<groupId>org.apache.tomcat.maven</groupId>
 					<artifactId>tomcat7-maven-plugin</artifactId>
@@ -241,7 +263,7 @@
 							<useTestClasspath>false</useTestClasspath> -->
 						<!-- optional if you want to add some extra directories into the classloader -->
 						<additionalClasspathDirs>
-							<additionalClasspathDir />
+							<additionalClasspathDir/>
 						</additionalClasspathDirs>
 					</configuration>
 					<!-- For any extra dependencies needed when running embedded Tomcat 

@@ -8,9 +8,8 @@
 		<artifactId>meow</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>meow-cql</artifactId>
-	<packaging>jar</packaging>
-	<name>meow-cql jar</name>
+	<artifactId>meow-cassandra</artifactId>
+	<name>meow-cassandra</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,5 +20,24 @@
 			<artifactId>cassandra-driver-core</artifactId>
 			<version>2.1.2</version>
 		</dependency>
+
+		<dependency>
+			<groupId>net.jpountz.lz4</groupId>
+			<artifactId>lz4</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.xerial.snappy</groupId>
+			<artifactId>snappy-java</artifactId>
+			<version>1.0.5.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
 	</dependencies>
 </project>

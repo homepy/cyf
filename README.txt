@@ -1,6 +1,11 @@
 Meow? Well, github is a lovely cat, so, Haha~
 Here is just an Demo  maven project now.
 
+meow-base      -  base module
+meow-cassandra -  about Apache Cassandra
+meow-batch     -  scheduled task
+meow-webapp    -  Web Application  
+
 
 src/main/java	Application/Library sources
 src/main/resources	Application/Library resources

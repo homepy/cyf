@@ -45,11 +45,11 @@ public class BatchClient extends SimpleClient {
 						UUID.randomUUID(), "Love Love Love", "Unbelievable",
 						"LeeHom Wang");
 	}
-	
+
 	public static void main(String[] args) {
 		BatchClient client = new BatchClient();
 		client.connect("127.0.0.1");
-//		client.createSchema();
+		// client.createSchema();
 		client.loadData1();
 		client.loadData2();
 		client.querySchema1();
@@ -57,7 +57,8 @@ public class BatchClient extends SimpleClient {
 	}
 
 	private void querySchema1() {
-		ResultSet results = getSession().execute("SELECT * FROM simplex.songs; ");
+		ResultSet results = getSession().execute(
+				"SELECT * FROM simplex.songs; ");
 		System.out
 				.println(String
 						.format("%-30s\t%-20s\t%-20s\n%s", "title", "album",
@@ -69,7 +70,7 @@ public class BatchClient extends SimpleClient {
 					row.getString("artist")));
 		}
 		System.out.println();
-		
+
 	}
 
 }
