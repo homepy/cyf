@@ -1,23 +1,13 @@
-Meow? Well, github is a lovely cat, so, Haha~
-Here is just an Demo  maven project now.
-
-meow-base      -  base module
-meow-cassandra -  about Apache Cassandra
-meow-batch     -  scheduled task
-meow-webapp    -  Web Application  
+Well, the logo of github is a lovely cat, so this project is named Meow.
+Here is just a Java project for my practice created by maven.
 
 
-src/main/java	Application/Library sources
-src/main/resources	Application/Library resources
-src/main/filters	Resource filter files
-src/main/assembly	Assembly descriptors
-src/main/config	Configuration files
-src/main/scripts	Application/Library scripts
-src/main/webapp	Web application sources
-src/test/java	Test sources
-src/test/resources	Test resources
-src/test/filters	Test resource filter files
-src/site	Site
-LICENSE.txt	Project's license
-NOTICE.txt	Notices and attributions required by libraries that the project depends on
-README.txt	Project's readme
+Modules:
+meow-base      -  base module.
+meow-jdbc      -  accessing relational database with JDBC, such as Spring JDBC, MyBatis and Hibernate.
+meow-cassandra -  accessing Apache Cassandra 2 with the Datastax CQL Java driver.
+meow-batch     -  scheduled task with Quartz, message driven bean with spring-jms and activeMQ.
+meow-webapp    -  Web Application with Spring MVC, jQuery and Bootstrap.
+
+
+

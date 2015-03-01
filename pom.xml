@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.github.homepy.meow</groupId>
+	<groupId>io.github.homepy.meow</groupId>
 	<artifactId>meow</artifactId>
 	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
@@ -9,16 +10,20 @@
 
 	<modules>
 		<module>meow-base</module>
-		<module>meow-mybatis</module>
+		<module>meow-jdbc</module>
 		<module>meow-cassandra</module>
 		<module>meow-webapp</module>
 		<module>meow-batch</module>
-  </modules>
+	</modules>
 
 	<!-- Shared version number properties -->
 	<properties>
 		<org.springframework.version>3.2.13.RELEASE</org.springframework.version>
+		<org.aspectj.version>1.8.5</org.aspectj.version>
+		<org.slf4j.version>1.7.6</org.slf4j.version>
 	</properties>
+
+
 
 	<dependencies>
 		<dependency>
@@ -35,17 +40,17 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.5</version>
+			<version>${org.slf4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-			<version>1.7.5</version>
+			<version>${org.slf4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.5</version>
+			<version>${org.slf4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -85,6 +90,18 @@
 		<!-- <dependency> <groupId>org.gedcom4j</groupId> <artifactId>gedcom4j</artifactId> 
 			<version>2.1.9</version> </dependency> -->
 
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${org.aspectj.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${org.aspectj.version}</version>
+		</dependency>
 
 		<!-- Core utilities used by other modules. Define this if you use Spring 
 			Utility APIs (org.springframework.core.*/org.springframework.util.*) -->
@@ -194,6 +211,12 @@
 			<version>${org.springframework.version}</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
 	</dependencies>
 
 
@@ -263,7 +286,7 @@
 							<useTestClasspath>false</useTestClasspath> -->
 						<!-- optional if you want to add some extra directories into the classloader -->
 						<additionalClasspathDirs>
-							<additionalClasspathDir/>
+							<additionalClasspathDir />
 						</additionalClasspathDirs>
 					</configuration>
 					<!-- For any extra dependencies needed when running embedded Tomcat 

@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.homepy.meow.mapper.CatMapper">
-  <select id="selectCat" resultType="com.github.homepy.meow.pojo.Cat">
+<mapper namespace="io.github.homepy.meow.mapper.CatMapper">
+  <select id="selectCat" resultType="io.github.homepy.meow.pojo.Cat">
     select * from cat where name
     = #{name}
   </select>
 
-  <insert id="insertCat" parameterType="com.github.homepy.meow.pojo.Cat">
+  <insert id="insertCat" parameterType="io.github.homepy.meow.pojo.Cat">
     insert into
     cat(name,ins_time,ins_name,color) values
     (#{name},now(),#{color},#{insName})

@@ -8,8 +8,9 @@
 		<artifactId>meow</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>meow-batch</artifactId>
-	<name>meow-batch</name>
+	<artifactId>meow-jdbc</artifactId>
+	<name>meow-jdbc</name>
+	<packaging>jar</packaging>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,30 +22,23 @@
 			<artifactId>meow-base</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
 		<dependency>
-			<groupId>io.github.homepy.meow</groupId>
-			<artifactId>meow-jdbc</artifactId>
-			<version>${project.version}</version>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.2.6</version>
 		</dependency>
 
 		<dependency>
-			<groupId>io.github.homepy.meow</groupId>
-			<artifactId>meow-cassandra</artifactId>
-			<version>${project.version}</version>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.1</version>
 		</dependency>
 
 		<dependency>
-			<groupId>org.quartz-scheduler</groupId>
-			<artifactId>quartz</artifactId>
-			<version>2.2.1</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.27</version>
+			<scope>runtime</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-all</artifactId>
-			<version>5.10.0</version>
-		</dependency>
-
 	</dependencies>
 </project>
