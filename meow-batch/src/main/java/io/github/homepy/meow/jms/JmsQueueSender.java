@@ -13,6 +13,7 @@ import org.springframework.jms.core.MessageCreator;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessagePostProcessor;
 
+@Deprecated
 public class JmsQueueSender {
 
     private JmsTemplate jmsTemplate;

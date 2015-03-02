@@ -10,15 +10,15 @@ import org.slf4j.LoggerFactory;
 
 public class TextMsgListener implements MessageListener {
 
-	Logger logger = LoggerFactory.getLogger(getClass());
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
 	public void onMessage(Message message) {
 		if (message instanceof TextMessage) {
 			try {
 				logger.info(((TextMessage) message).getText());
-			} catch (JMSException ex) {
-				logger.error("", ex);
+			} catch (JMSException e) {
+				logger.error("", e);
 			}
 		} else {
 			logger.warn("Message must be of type TextMessage");

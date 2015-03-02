@@ -9,8 +9,7 @@
 
 	<bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL">
-			<value>failover:(tcp://192.168.1.100:61616,tcp://192.168.1.100:61616)?randomize=false
-			</value>
+			<value>failover:(tcp://192.168.1.100:61616,tcp://192.168.1.101:61616)</value>
 		</property>
 		<property name="useAsyncSend" value="true"></property>
 	</bean>
@@ -35,30 +34,20 @@
 
 	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
 		<constructor-arg>
-			<value>topic_cat,topic_dog</value><!-- 多个topic用,隔开 -->
+			<value>topic_dog</value><!-- 多个topic用,隔开 -->
 		</constructor-arg>
 	</bean>
 
-
-	<bean id="msgConsumer"
-		class="io.github.homepy.meow.jms.TextMsgConsumer" />
-	<bean id="queueMessageListenerContainer"
-		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="destination" ref="queueDestination" />
-		<property name="messageListener" ref="msgConsumer" />
-		<property name="concurrentConsumers" value="10" />
-		<property name="pubSubDomain" value="false" /> <!-- false for queue -->
+	<bean id="jmsQueueSender" class="io.github.homepy.meow.jms.JmsSender">
+		<constructor-arg index="0" ref="jmsTemplate" />
+		<constructor-arg index="1" ref="queueDestination" />
 	</bean>
 	
-	<bean id="topicMessageListenerContainer"
-		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="destination" ref="topicDestination" />
-		<property name="messageListener" ref="msgConsumer" />
-		<property name="concurrentConsumers" value="10" />
-		<property name="pubSubDomain" value="true" /> <!-- true for topic -->
+	<bean id="jmsTopicSender" class="io.github.homepy.meow.jms.JmsSender">
+		<constructor-arg index="0" ref="jmsTemplate" />
+		<constructor-arg index="1" ref="topicDestination" />
 	</bean>
+
 
 
 
