@@ -40,6 +40,9 @@ public class CassandraAppender extends AppenderSkeleton {
 	private String password = "";
 	private static final String ip = getIP();
 	private static final String hostname = getHostName();
+	private boolean is_async = false;
+
+
 
 	// Encryption. sslOptions and authProviderOptions are JSON maps requiring
 	// Jackson
@@ -49,10 +52,11 @@ public class CassandraAppender extends AppenderSkeleton {
 
 	// Keyspace/ColumnFamily information
 	private String keyspaceName = "logging";
-	private String columnFamily = "log_entries";
+	private String columnFamily = "log_entry";
 	private String appName = "default";
 	private String replication = "{ 'class' : 'SimpleStrategy', 'replication_factor' : 1 }";
 	private ConsistencyLevel consistencyLevelWrite = ConsistencyLevel.ONE;
+	
 
 	// CF column names
 	public static final String ID = "key";
@@ -78,6 +82,7 @@ public class CassandraAppender extends AppenderSkeleton {
 	private volatile boolean initializationFailed = false;
 	private Cluster cluster;
 	private Session session;
+	
 
 	public CassandraAppender() {
 		LogLog.debug("Creating CassandraAppender");
@@ -221,14 +226,18 @@ public class CassandraAppender extends AppenderSkeleton {
 
 		bound.setString(10, event.getRenderedMessage());
 		bound.setString(11, event.getNDC());
-		bound.setLong(12, new Long(LoggingEvent.getStartTime()));
+		bound.setLong(12, LoggingEvent.getStartTime());
 		bound.setString(13, event.getThreadName());
 
 		String[] throwableStrs = event.getThrowableStrRep();
 		bound.setString(14, throwableStrs == null ? null : Joiner.on(", ").join(throwableStrs));
 
-		bound.setLong(15, new Long(event.getTimeStamp()));
-		session.execute(bound);
+		bound.setLong(15, event.getTimeStamp());
+		if (is_async) {
+			session.executeAsync(bound);
+		} else {
+			session.execute(bound);
+		}
 	}
 
 	/**
@@ -298,6 +307,14 @@ public class CassandraAppender extends AppenderSkeleton {
 
 	public void setPassword(String password) {
 		this.password = unescape(password);
+	}
+	
+	public boolean isIs_async() {
+		return is_async;
+	}
+
+	public void setIs_async(boolean is_async) {
+		this.is_async = is_async;
 	}
 
 	public String getColumnFamily() {

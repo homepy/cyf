@@ -39,13 +39,13 @@
 	</bean>
 
 	<bean id="jmsQueueSender" class="io.github.homepy.meow.jms.JmsSender">
-		<constructor-arg index="0" ref="jmsTemplate" />
-		<constructor-arg index="1" ref="queueDestination" />
+		<constructor-arg name="jmsTemplate" ref="jmsTemplate" />
+		<constructor-arg name="destination" ref="queueDestination" />
 	</bean>
-	
+
 	<bean id="jmsTopicSender" class="io.github.homepy.meow.jms.JmsSender">
-		<constructor-arg index="0" ref="jmsTemplate" />
-		<constructor-arg index="1" ref="topicDestination" />
+		<constructor-arg name="jmsTemplate" ref="jmsTemplate" />
+		<constructor-arg name="destination" ref="topicDestination" />
 	</bean>
 
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:context="http://www.springframework.org/schema/context"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd">
+
+
+	<bean id="builder0" class="com.datastax.driver.core.Cluster"
+		factory-method="builder" />
+	<bean id="builder1" factory-bean="builder0" factory-method="addContactPoint">
+		<constructor-arg name="address" value="192.168.1.100" />
+	</bean>
+	<bean id="builder" factory-bean="builder1" factory-method="withCredentials">
+		<constructor-arg name="username" value="cassandra" />
+		<constructor-arg name="password" value="cassandra" />
+	</bean>
+	
+	<bean id="cluster" factory-bean="builder" factory-method="build" />
+	
+	<bean id="session" factory-bean="cluster" factory-method="connect" />
+</beans>

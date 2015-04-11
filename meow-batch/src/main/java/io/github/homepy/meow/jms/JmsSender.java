@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.util.Assert;
 
 public class JmsSender {
 
@@ -19,6 +20,8 @@ public class JmsSender {
 
 	public JmsSender(JmsTemplate jmsTemplate, Destination destination) {
 		super();
+		Assert.notNull(jmsTemplate);
+		Assert.notNull(destination);
 		this.jmsTemplate = jmsTemplate;
 		this.destination = destination;
 	}

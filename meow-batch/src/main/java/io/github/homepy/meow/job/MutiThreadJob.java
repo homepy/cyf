@@ -26,7 +26,7 @@ public class MutiThreadJob {
 	}
 
 	public void doCallableTask() {
-		log.info("----Start doIt----");
+		log.info("----Start doCallableTask----");
 
 		List<Cat> cats = new ArrayList<Cat>();
 		for (int i = 0; i < 200; i++) {
@@ -54,7 +54,7 @@ public class MutiThreadJob {
 			}
 		}
 
-		log.info("----End doIt----");
+		log.info("----End doCallableTask----");
 	}
 
 	public static void main(String[] args) {

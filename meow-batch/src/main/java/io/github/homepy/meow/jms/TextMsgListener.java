@@ -16,12 +16,12 @@ public class TextMsgListener implements MessageListener {
 	public void onMessage(Message message) {
 		if (message instanceof TextMessage) {
 			try {
-				logger.info(((TextMessage) message).getText());
+				logger.info("text ={}", ((TextMessage) message).getText());
 			} catch (JMSException e) {
 				logger.error("", e);
 			}
 		} else {
-			logger.warn("Message must be of type TextMessage");
+			logger.warn("Message must be of type TextMessage!");
 		}
 	}
 }
