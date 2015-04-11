@@ -3,7 +3,7 @@ CREATE KEYSPACE meow WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy', '
 
 
 drop table if exists meow.log_entry;
-CREATE TABLE meow.log_entry (
+CREATE TABLE if not exists meow.log_entry (
     key uuid,
     app_name text,
     app_start_time bigint,
