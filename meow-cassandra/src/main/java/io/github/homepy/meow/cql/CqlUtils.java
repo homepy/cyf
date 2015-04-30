@@ -34,29 +34,32 @@ public class CqlUtils {
 	private static final Logger logger = LoggerFactory.getLogger(CqlUtils.class);
 
 	/**
+	 * private static LoadBalancingPolicy loadBalancingPolicy;
 	 * The load balancing policy determines which node to execute a query on. By
 	 * default, the driver uses a round robin load balancing policy.
 	 * DCAwareRoundRobinPolicy, LatencyAwarePolicy, RoundRobinPolicy,
 	 * TokenAwarePolicy, WhiteListPolicy
 	 */
-	// private static LoadBalancingPolicy loadBalancingPolicy;
+	 
 
 	/**
+	 * private static ReconnectionPolicy reconnectionPolicy;
 	 * The reconnection policy determines how often a reconnection to a dead
 	 * node is attempted. By default, the driver uses an exponential
 	 * reconnection policy. ConstantReconnectionPolicy,
 	 * ExponentialReconnectionPolicy
 	 */
-	// private static ReconnectionPolicy reconnectionPolicy;
+	
 
 	/**
+	 * private static RetryPolicy retryPolicy;
 	 * The retry policy determines a default behavior to adopt when a request
 	 * either times out or if a node is unavailable. By default, the driver uses
 	 * a default retry policy.
 	 * DefaultRetryPolicy,DowngradingConsistencyRetryPolicy
 	 * ,FallthroughRetryPolicy,LoggingRetryPolicy
 	 */
-	// private static RetryPolicy retryPolicy;
+	 
 
 	/**
 	 * Connection options...
@@ -112,7 +115,8 @@ public class CqlUtils {
 	}
 
 	public static void main(String[] args) {
-		CqlUtils.buildCluster("127.0.0.1", null, null).connect();
+		Cluster clu = CqlUtils.buildCluster("192.168.1.100", null, null);
+		System.out.println(clu.getMetadata().getKeyspace("meow").exportAsString());
 	}
 
 	public static List<Map<String, Object>> convert2MapList(ResultSet resultSet) {
@@ -137,14 +141,12 @@ public class CqlUtils {
 		Object obj = null;
 		if (DataType.ascii().equals(type)) {
 			obj = row.getString(columnName);
-		} else if (DataType.bigint().equals(type)) {
+		} else if (DataType.bigint().equals(type) || DataType.counter().equals(type)) {
 			obj = row.getLong(columnName);
 		} else if (DataType.blob().equals(type)) {
 			obj = row.getBytes(columnName);
 		} else if (DataType.cboolean().equals(type)) {
 			obj = row.getBool(columnName);
-		} else if (DataType.counter().equals(type)) {
-			obj = row.getLong(columnName);
 
 		} else if (DataType.decimal().equals(type)) {
 			obj = row.getDecimal(columnName);
@@ -157,17 +159,13 @@ public class CqlUtils {
 		} else if (DataType.cint().equals(type)) {
 			obj = row.getInt(columnName);
 
-		} else if (DataType.text().equals(type)) {
+		} else if (DataType.text().equals(type) || DataType.varchar().equals(type)) {
 			obj = row.getString(columnName);
 		} else if (DataType.timestamp().equals(type)) {
 			obj = row.getDate(columnName);
-		} else if (DataType.timeuuid().equals(type)) {
+		} else if (DataType.timeuuid().equals(type) || DataType.uuid().equals(type)) {
 			obj = row.getUUID(columnName);
-		} else if (DataType.uuid().equals(type)) {
-			obj = row.getUUID(columnName);
-		} else if (DataType.varchar().equals(type)) {
-			obj = row.getString(columnName);
-
+			
 		} else if (DataType.varint().equals(type)) {
 			obj = row.getVarint(columnName);
 		} else if (DataType.set(DataType.text()).equals(type)) {

@@ -13,12 +13,12 @@ public class DaoAspect {
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	
-	@Pointcut("within(io.github.homepy.meow.controller..*)")
-	public void inControllerLayer() {
+	@Pointcut("within(io.github.homepy.meow.*.dao.*)")
+	public void inDaoLayer() {
 	}
 
 
-	@Around("inControllerLayer()")
+	@Around("inDaoLayer()")
 	public Object around(ProceedingJoinPoint pjp) throws Throwable {
 		Long timeStart = System.currentTimeMillis();
 		try {

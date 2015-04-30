@@ -21,4 +21,8 @@
 	<bean id="cluster" factory-bean="builder" factory-method="build" />
 	
 	<bean id="session" factory-bean="cluster" factory-method="connect" />
+	
+	<context:component-scan base-package="io.github.homepy.meow.cql" />
+	<context:component-scan base-package="io.github.homepy.meow.aspect" />
+	<aop:aspectj-autoproxy />
 </beans>

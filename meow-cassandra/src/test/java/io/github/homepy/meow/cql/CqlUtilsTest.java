@@ -19,29 +19,29 @@ import com.datastax.driver.core.Session;
  * @author homepy
  *
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:cql-test.xml"})
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = { "classpath:cql-test.xml"})
 public class CqlUtilsTest {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(CqlUtilsTest.class);
-	
-	@Autowired
-	private Cluster cluster;
-	
-	@Autowired
-	private Session session;
+//	private static final Logger logger = LoggerFactory
+//			.getLogger(CqlUtilsTest.class);
+//	
+//	@Autowired
+//	private Cluster cluster;
+//	
+//	@Autowired
+//	private Session session;
 
 	@Test
 	public void test() {
-		Metadata metadata = cluster.getMetadata();
+//		Metadata metadata = cluster.getMetadata();
 //		logger.info("Connected to cluster: {},", metadata.getClusterName());
 //		for (Host host : metadata.getAllHosts()) {
 //			logger.info("Datacenter: {}; Host: {}; Rack: {}", host.getDatacenter(), host.getAddress(), host.getRack());
 //		}
 //		logger.info(cluster.getMetadata().getKeyspace("meow").getTable("log_entry").exportAsString());
 		
-		logger.info(session.toString());
+//		logger.info(session.toString());
 		
 	}
 	
