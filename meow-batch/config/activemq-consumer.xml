@@ -28,13 +28,20 @@
 
 	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg>
-			<value>queue_cat,queue_dog</value><!-- 多个queue用,隔开 -->
+			<value>queue_dog</value><!-- 多个queue用,隔开 -->
 		</constructor-arg>
 	</bean>
 
 	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
 		<constructor-arg>
-			<value>topic_cat,topic_dog</value><!-- 多个topic用,隔开 -->
+			<value>topic_cat</value><!-- 多个topic用,隔开 -->
+		</constructor-arg>
+	</bean>
+	
+	
+	<bean id="virtualTopicDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>Consumer.A.VirtualTopic.octocat</value><!-- 多个topic用,隔开 -->
 		</constructor-arg>
 	</bean>
 
@@ -57,6 +64,15 @@
 		<property name="messageListener" ref="textMsgListener" />
 		<property name="concurrentConsumers" value="1" /><!--Must be 1 for topic -->
 		<property name="pubSubDomain" value="true" /> <!-- true for topic -->
+	</bean>
+	
+	<bean id="virtualTopicMessageListenerContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+		<property name="destination" ref="virtualTopicDestination" />
+		<property name="messageListener" ref="textMsgListener" />
+		<property name="concurrentConsumers" value="10" /><!--Must be 1 for topic -->
+		<property name="pubSubDomain" value="false" /> <!-- true for topic -->
 	</bean>
 
 

@@ -28,13 +28,20 @@
 
 	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg>
-			<value>queue_cat,queue_dog</value><!-- 多个queue用,隔开 -->
+			<value>queue_dog</value><!-- 多个queue用,隔开 -->
 		</constructor-arg>
 	</bean>
 
 	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
 		<constructor-arg>
-			<value>topic_dog</value><!-- 多个topic用,隔开 -->
+			<value>topic_cat</value><!-- 多个topic用,隔开 -->
+		</constructor-arg>
+	</bean>
+	
+	
+	<bean id="virtualTopicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg>
+			<value>VirtualTopic.octocat</value><!-- 多个topic用,隔开 -->
 		</constructor-arg>
 	</bean>
 
@@ -46,6 +53,11 @@
 	<bean id="jmsTopicSender" class="io.github.homepy.meow.jms.JmsSender">
 		<constructor-arg name="jmsTemplate" ref="jmsTemplate" />
 		<constructor-arg name="destination" ref="topicDestination" />
+	</bean>
+	
+	<bean id="jmsVirtualTopicSender" class="io.github.homepy.meow.jms.JmsSender">
+		<constructor-arg name="jmsTemplate" ref="jmsTemplate" />
+		<constructor-arg name="destination" ref="virtualTopicDestination" />
 	</bean>
 
 

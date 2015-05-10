@@ -25,7 +25,7 @@ import io.github.homepy.meow.cql.dao.EventTimelineDao;
 public class EventTimelineDaoImpl implements EventTimelineDao {
 
 	private final static Integer DEFAULT_LIMIT = 200;
-	private final Logger logger = LoggerFactory.getLogger(getClass());
+	private static final Logger logger = LoggerFactory.getLogger(EventTimelineDaoImpl.class);
 	private final String keyspace = "meow";
 	private final String table = "event_timeline";
 
@@ -51,7 +51,7 @@ public class EventTimelineDaoImpl implements EventTimelineDao {
 			stat.limit(DEFAULT_LIMIT);
 		}
 		stat.setConsistencyLevel(ConsistencyLevel.LOCAL_QUORUM);
-		logger.debug("{}", stat.getQueryString());
+		logger.debug(stat.getQueryString());
 		return CqlUtils.convert2MapList(session.execute(stat));
 	}
 

@@ -20,18 +20,29 @@ public class JmsSenderTest {
 	private JmsSender jmsQueueSender;
 	@Autowired
 	private JmsSender jmsTopicSender;
+	
+	@Autowired
+	private JmsSender jmsVirtualTopicSender;
 
 	@Test
 	public void testJmsQueueSender() {
-		for (int i = 0; i < 50; i++) {
-			jmsQueueSender.sendTextMessage("testJmsQueueSender" + i);
+		for (int i = 0; i < 5; i++) {
+			jmsQueueSender.sendTextMessage("Queue Message:" + i);
 		}
 	}
 
 	@Test
 	public void testJmsTopicSender() {
-		for (int i = 0; i < 50; i++) {
-			jmsTopicSender.sendTextMessage("testJmsTopicSender" + i);
+		for (int i = 0; i < 5; i++) {
+			jmsTopicSender.sendTextMessage("Topic Message:" + i);
+		}
+
+	}
+	
+	@Test
+	public void testJmsVirtualTopicSender() {
+		for (int i = 0; i < 5; i++) {
+			jmsVirtualTopicSender.sendTextMessage("Virtual Topic Message:" + i);
 		}
 
 	}

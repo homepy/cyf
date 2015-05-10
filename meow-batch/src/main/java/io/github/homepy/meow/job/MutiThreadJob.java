@@ -16,7 +16,7 @@ import io.github.homepy.meow.pojo.Cat;
 import io.github.homepy.meow.task.CallableTask;
 
 public class MutiThreadJob {
-	private final Logger log = LoggerFactory.getLogger(getClass());
+	private static final Logger log = LoggerFactory.getLogger(MutiThreadJob.class);
 
 	private final int threadSize;
 

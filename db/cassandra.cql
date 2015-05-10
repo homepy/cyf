@@ -26,7 +26,7 @@ CREATE TABLE if not exists meow.log_entry (
   
   
 drop table if exists meow.alarm_event;
-CREATE TABLE if not exists meow.alarm_event (
+CREATE TABLE if not exists meow.event (
    day text,
    hour int,
    min int,

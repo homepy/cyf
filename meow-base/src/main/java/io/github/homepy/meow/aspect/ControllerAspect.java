@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 @Aspect
 public class ControllerAspect {
 
-	private final Logger logger = LoggerFactory.getLogger(getClass());
+	private static final Logger logger = LoggerFactory.getLogger(ControllerAspect.class);
 	
 	@Pointcut("within(io.github.homepy.meow.controller..*)")
 	public void inControllerLayer() {
@@ -23,9 +23,9 @@ public class ControllerAspect {
 		Long timeStart = System.currentTimeMillis();
 		try {
 			return pjp.proceed();
-		} catch (Throwable t) {
-			logger.error("Controller Throwable", t);
-			throw t;
+		} catch (Exception e) {
+			logger.error("Controller Exception", e);
+			throw e;
 		} finally {
 			Long timeEnd = System.currentTimeMillis();
 			Long timeCost = timeEnd - timeStart;

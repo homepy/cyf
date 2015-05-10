@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 public class TextMsgListener implements MessageListener {
 
-	private final Logger logger = LoggerFactory.getLogger(getClass());
+	private static final Logger logger = LoggerFactory.getLogger(TextMsgListener.class);
 
 	@Override
 	public void onMessage(Message message) {

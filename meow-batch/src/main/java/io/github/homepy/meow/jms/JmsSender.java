@@ -16,7 +16,7 @@ public class JmsSender {
 	private JmsTemplate jmsTemplate;
 	private Destination destination;
 
-	private final Logger logger = LoggerFactory.getLogger(getClass());
+	private static final Logger logger = LoggerFactory.getLogger(JmsSender.class);
 
 	public JmsSender(JmsTemplate jmsTemplate, Destination destination) {
 		super();
