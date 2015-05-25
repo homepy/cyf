@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.homepy.meow</groupId>
 	<artifactId>meow</artifactId>
@@ -15,7 +14,8 @@
 		<module>meow-webapp</module>
 		<module>meow-batch</module>
 		<module>meow-storm</module>
-	</modules>
+    <module>meow-hadoop</module>
+  </modules>
 
 	<!-- Shared version number properties -->
 	<properties>
@@ -288,7 +288,7 @@
 							<useTestClasspath>false</useTestClasspath> -->
 						<!-- optional if you want to add some extra directories into the classloader -->
 						<additionalClasspathDirs>
-							<additionalClasspathDir />
+							<additionalClasspathDir/>
 						</additionalClasspathDirs>
 					</configuration>
 					<!-- For any extra dependencies needed when running embedded Tomcat 

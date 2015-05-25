@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>统一风险监控平台</title>
+<!-- Bootstrap  -->
+<!-- 
+<link rel="stylesheet" href="bootstrap-3.3.0/css/bootstrap.min.css">
+ -->
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+<script type="text/javascript" src="bootstrap-3.3.0/js/html5shiv.min.js"></script>
+<script type="text/javascript" src="bootstrap-3.3.0/js/respond.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">预警监控</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<form class="navbar-form navbar-right">
+						<div class="form-group">
+							<label class="sr-only" for="time_start">日期</label>
+							<input id="date" class="form-control" type="date" value="">
+						</div>
+						<div class="form-group">
+							<label class="sr-only" for="time_start">起始时间</label>
+							<input id="time_start" class="form-control" type="text" value="" size="12" maxlength="12" placeholder="yyyyMMddHHmm">
+						</div>
+						<div class="form-group">
+							<label class="sr-only" for="time_end">结束时间</label>
+							<input id="time_end" class="form-control" type="text" value="" size="12" maxlength="12" placeholder="yyyyMMddHHmm">
+						</div>
+						<div class="form-group">
+							<label class="sr-only" for="limit">显示条数</label>
+							<input id="limit" class="form-control" type="text" placeholder="显示条数" size="4" maxlength="3">
+						</div>
+						<div class="form-group" data-toggle="buttons">
+							<label class="btn btn-primary">自动刷新
+							<input id="auto_reflash" type="checkbox" autocomplete="off">
+							</label>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-default" type="button" id="btnQuery" data-toggle="tooltip" data-placement="bottom"
+								title="自动刷新: 选中[自动刷新],再点击[查询]" onclick="alarm.monitor();">查询</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+
+	<div class="container">
+		<div class="alert e-hide" id="resultTips">
+			<div id="divInfo"></div>
+		</div>
+		<div class="tabbable">
+			<ul class="nav nav-pills">
+				<li class="active"><a href="#tab1" data-toggle="tab">申请</a></li>
+				<li class=""><a href="#" data-toggle="tab">&nbsp;</a></li>
+			</ul>
+			
+			<div class="tab-content">
+				<div class="tab-pane active" id="tab1">
+					<table class="table  table-hover">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>时间</th>
+								<th>事件</th>
+								<th>规则</th>
+								<th>规则编号</th>
+								<!-- <th>状态</th> -->
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<!--<td>&nbsp;</td> -->
+								<td>&nbsp;</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 列表弹出框 -->
+	<div id="detailModal" class="modal fade" id="detailModal" tabindex="-1"
+		role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="detailModalLabel">预警详情#</h4>
+				</div>
+				<div class="modal-body">
+					<div id="divDetail">
+						<table class="table  table-striped table-condensed table-responsive">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>时间</th>
+									<th>事件</th>
+									<!--<th>状态</th> -->
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<!--<td>&nbsp;</td> -->
+									<td>&nbsp;</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 字段信息弹出框 -->
+	<div id="fieldModal" class="modal fade" id="fieldModal" tabindex="-1"
+		role="dialog" aria-labelledby="fieldModalLabel" aria-hidden="true">
+		<!-- <div class="modal-dialog modal-lg"> -->
+		<!-- <div class="modal-dialog modal-sm"> -->
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="fieldModalLabel">事件信息#</h4>
+				</div>
+				<div class="modal-body">
+					<div id="divField">
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>属性名称</th>
+									<th>属性值</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<jsp:include page="footer.jsp"></jsp:include>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			alarm.init();
+		});
+
+		(function(window, $) {
+			var alarm = {
+					
+				timeId : null, // window.setTimeout返回值
+				fieldMap : null,
+				
+				init : function() {
+					
+				//	alarm.showProgress();
+					alarm.monitor();
+					alarm.getFieldMap();
+				},
+
+				
+				/**
+				 * 监控信息查询
+				 * @return {void}
+				 */
+				monitor : function() {
+					$.ajax({
+						url : 'alarm/app/events',
+						type : 'GET',
+						dataType : 'json',
+						data : {
+							status : $("#status").val(),
+							ruleno : $("#ruleno").val(),
+							limit : $("#limit").val(),
+							time_start : $("#time_start").val(),
+							time_end : $("#time_end").val()
+						},
+						complete : function(xhr, status) {
+							var json = eval("(" + xhr.responseText + ")");
+							alarm.showTips(json.status, json.msg);
+							if (json.status == "0") {
+								//alert(json.body[0].eventid);
+								alarm.render(json.body);
+							}
+							if ($("#auto_reflash").prop("checked") == true) {
+								alarm.timeId = window.setTimeout(alarm.monitor,
+										10000);
+							} else {
+								window.clearTimeout(alarm.timeId);
+							}
+						}
+					});
+				},
+				/**
+				 * 渲染数据:
+				 * @param  {JSON} data 
+				 * @return {void}
+				 */
+				render : function(data) {
+					$("#tab1").empty();
+					var html = [];
+					html.push("<table class=\"table  table-condensed table-hover\">");
+					html.push("	  <thead>");
+					html.push("		<tr>");
+					html.push("			<th>#</th>");
+					html.push("			<th width=176px>时间</th>");
+					html.push("			<th>事件</th>");
+					html.push("			<th>规则</th>");
+					html.push("			<th>规则编号</th>");
+					//html.push("			<th width=60px>状态</th>");
+					html.push("			<th>操作</th>");
+					html.push("		</tr>");
+					html.push("	  </thead>");
+					html.push("	  <tbody>");
+					var item;
+					var divClazz = "";
+					for (var i = 0; i < data.length; i++) {
+						item = data[i];
+						divClazz = "div_hidden" + i;
+						html.push("<tr " + alarm.getAlarmStyle(i % 2) + ">");
+						html.push("	<td style='vertical-align: middle;text-align:center;'>" + (i + 1) + "</td>");
+						html.push("	<td style='vertical-align: middle;'>"
+								+ (item.creattime == undefined ? "" : new Date(
+										item.creattime).toLocaleString())
+								+ "</td>");
+						html.push("	<td style='vertical-align: middle;'>");
+						html.push("  <div class='" + divClazz + "' style='width: 300px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;' onmouseover=alarm.showDivContent('" + divClazz + "') onmouseout=alarm.hideDivContent('" + divClazz + "') >");
+						html.push(item.eventdesc);
+						html.push("  </div>");
+						html.push("	</td>");
+						html.push("	<td style='vertical-align: middle;'>");
+						html.push("	 <div class='" + divClazz + "' style='width: 300px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;' onmouseover=alarm.showDivContent('" + divClazz + "') onmouseout=alarm.hideDivContent('" + divClazz + "') >");
+						html.push(item.rulename);
+						html.push("  </div>");
+						html.push("	</td>");
+						html.push("	<td style='vertical-align: middle;'>" + item.ruleno + "</td>");
+						//html.push("	<td style='vertical-align: middle;text-align:center;'>"
+						//		+ ((item.status == 0) ? "未处理" : "已处理")
+						//		+ "</td>");
+						html
+								.push("<td style='vertical-align: middle;text-align:center;'><button class='btn btn-sm' type='button' onclick='alarm.showDetail(\""
+										+ item.eventid
+										+ "\", \""
+										+ item.rulename + "\")'>详情</button>");
+						html.push("</tr>");
+					}
+					html.push("    <tr></tr>");
+
+					html.push("	  </tbody>");
+					html.push("</table>");
+					$("#tab1").html(html.join(""));
+				},
+				
+				showTip : function(cls, msg) {
+					$("#divInfo").html(msg);
+					$("#resultTips").addClass(cls);
+					$("#resultTips").show('slow', function() {
+						setTimeout(alarm.hideTips, 2000); //延时2秒后消失
+					});
+				},
+				
+				showTips : function(status, msg) {
+					var clsName = (status == "0") ? "alert-success"
+							: "alert-warning";
+					$("#divInfo").html(msg);
+					$("#resultTips").addClass(clsName);
+					$("#resultTips").show('slow', function() {
+						setTimeout(alarm.hideTips, 2000);//延时2秒后消失
+					});
+				},
+
+				/**
+				 * 隐藏结果提示
+				 */
+				hideTips : function() {
+					$("#resultTips").hide('slow', function() {
+						$(this).removeClass('alert-success');
+						$(this).removeClass('alert-info');
+						$(this).removeClass('alert-warning');
+						$(this).removeClass('alert-danger');
+					});
+				},
+
+				/**
+				 * 根据风险级别，获取预警样式
+				 * @param  {Integer} level
+				 * @return {String}
+				 */
+				getAlarmStyle : function(level) {
+					var style = "";
+					switch (level) {
+					case 1:
+						style = "info";
+						break;
+					case 4:
+						style = "success";
+						break;
+					case 7:
+						style = "warning";
+						break;
+					case 10:
+						style = "danger";
+						break;
+					default:
+						style = "";
+					}
+					return " class=\" " + style + "\"";
+				},
+				
+				
+				/**
+				 * 获取事件详细信息字段对应中文描述
+				 * @return map
+				 */
+				 getFieldMap : function() {
+					$.ajax({
+						url : 'alarm/config/fieldmaps/app' ,
+						type : 'get',
+						dataType : 'json',
+						data : {
+						},
+						complete : function(xhr, status) {
+							var retMap;
+							var json = eval("(" + xhr.responseText + ")");
+							if (json.status == "0") {
+								retMap = json.body;
+							}
+							if (retMap == undefined) {
+								alarm.showTip("alert-warning", "加载系统参数失败...");
+							} else {
+								alarm.showTip("alert-info", "加载系统参数成功！");
+							}
+							alarm.fieldMap = retMap;
+						}
+					});
+				},
+
+				/**
+				 * 显示详细信息
+				 * @param  {String} eventid, {String} rulename
+				 * @return {void}
+				 */
+				showDetail : function(eventid, rulename) {
+					$("#detailModalLabel").html(
+							"预警详情#" + rulename + "#" + eventid);
+					$('#detailModal').modal('show');
+					eventid = encodeURI(eventid);
+					$.ajax({
+						url : 'alarm/app/events/' + eventid + '/details',
+						type : 'GET',
+						dataType : 'json',
+						data : {},
+						complete : function(xhr, status) {
+							var json = eval("(" + xhr.responseText + ")");
+							if (json.status === 0) {
+								alarm.renderDetail(json.body);
+							}
+						}
+					});
+				},
+				
+				renderDetail : function(data) {
+					var html = [];
+					$("#divDetail").empty();
+					html.push("<table class='table table-striped'>");
+					html.push("  <thead>");
+					html.push("    <tr>");
+					html.push("      <th>#</th>");
+					html.push("      <th>时间</th>");
+					html.push("      <th>事件</th>");
+					//html.push("      <th>状态</th>");
+					html.push("      <th>操作</th>");
+					html.push("    </tr>");
+					html.push("  </thead>");
+					html.push("<tbody>");
+
+					var item;
+					for (var i = 0; i < data.length; i++) {
+						item = data[i];
+						html.push("<tr>");
+						html.push("  <td>" + (i + 1) + "</td>");
+						html.push("  <td>"
+								+ (item.creattime == undefined ? "" : new Date(
+										item.creattime).toLocaleString())
+								+ "</td>");
+						html.push("  <td>" + item.eventdesc + "</td>");
+						//html.push("  <td>"
+						//		+ ((item.status == 0) ? "未处理" : "已处理")
+						//		+ "</td>");
+						html
+								.push("<td style='vertical-align: middle;'><button type='button' class='btn btn-sm' onclick='alarm.showField("
+										+ item.factjson + ");'>更多</button>");
+						html.push("</tr>");
+					}
+					html.push("	</tbody>");
+					html.push("</table>");
+					$("#divDetail").html(html.join(""));
+				},
+
+				showField : function(map) {
+					$("#detailModal").modal("hide");
+//					$("#fieldModal").modal("show");
+//					$("#fieldModalLabel").html("事件信息#");
+					var html = [];
+					$("#divField").empty();
+					html
+							.push("<table class='table  table-bordered table-striped table-condensed table-responsive'>");
+					html.push("  <thead>");
+					html.push("    <tr>");
+					html.push("      <th>属性名称</th>");
+					html.push("      <th>属性值</th>");
+					html.push("    </tr>");
+					html.push("  </thead>");
+					
+					html.push("  <tbody>");
+					for (key in map) {
+						if (key != "COLUMN_FAMILY_NAME") {
+							var value = $.trim(map[key]);
+							var property = key;
+							if(alarm.fieldMap!=undefined && alarm.fieldMap[key]!=undefined && alarm.fieldMap[key]!=""){
+								property=alarm.fieldMap[key];
+							}
+							html.push("    <tr>");
+							html.push("      <td>" + property + "</td>");
+							html.push("      <td>" + value + "</td>");
+							html.push("    </tr>");
+						}
+					}
+					html.push("  </tbody>");
+					html.push("</table>");
+					$("#divField").html(html.join(""));
+					$("#fieldModal").modal("show");
+				},
+				
+				showDivContent: function(divClazz){
+					$("." + divClazz).attr("style", "width: 300px;word-wrap:break-word;");
+				},
+				
+				hideDivContent: function(divClazz){
+					$("." + divClazz).attr("style", "width: 300px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;");
+				}
+
+			};
+
+			window.alarm = (window.alarm) ? window.alarm : alarm;
+
+		})(window, jQuery);
+	</script>
+</body>

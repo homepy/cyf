@@ -24,31 +24,25 @@ CREATE TABLE if not exists meow.log_entry (
 )  WITH
   comment = '日志记录';
   
-  
-drop table if exists meow.alarm_event;
-CREATE TABLE if not exists meow.event (
-   day text,
-   hour int,
-   min int,
-   sec int,
-   unique_id timeuuid,
-   rule_id text,
-   rule_desc text,
-   remark text,
-   details map<text, text>,
-   PRIMARY KEY (day, hour, min, sec)
-)  WITH CLUSTERING ORDER BY (insertion_time DESC),
-  comment = '预警事件'; 
-  
+ 
+
 CREATE TABLE if not exists meow.event_timeline (
-   type text,
-   day text,
-   tuuid timeuuid,
-   time timestamp,
-   rule_id text,
-   rule_desc text,
-   remark text,
-   details map<text, text>,
-   PRIMARY KEY ((type, day), tuuid)
-)  WITH CLUSTERING ORDER BY (tuuid DESC)
+ type text,
+  date text,
+  time_id timeuuid,
+  event_id text,
+  note text,
+  rule_desc text,
+  rule_id text,
+  PRIMARY KEY ((type, date), time_id)
+)  WITH CLUSTERING ORDER BY (time_id DESC)
 and comment = '事件时间线';  
+
+CREATE TABLE meow.event (
+  type text,
+  event_id text,
+  time timestamp,
+  details map<text, text>,
+  rules list<text>,
+  PRIMARY KEY ((type, event_id))
+) WITH comment='事件';

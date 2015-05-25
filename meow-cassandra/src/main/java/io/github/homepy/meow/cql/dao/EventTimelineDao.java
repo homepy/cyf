@@ -9,33 +9,35 @@ public interface EventTimelineDao {
 	/**
 	 * 
 	 * @param type
-	 * @param day
+	 * @param date
 	 * @param limit
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	List<Map<String, Object>> query(String type, String day, Integer limit, Date start, Date end);
+	List<Map<String, Object>> query(String type, String date,  Date start, Date end, Integer limit);
+
 
 	/**
-	 * insert into event_timeline (type, day, tuuid ...) values ('type', 'day', now() ...);
+	 * 
 	 * @param type
-	 * @param day
+	 * @param date
 	 * @param ruleId
 	 * @param ruleDesc
-	 * @param details
+	 * @param eventId
+	 * @param note
 	 */
-	void insert(String type, String day, String ruleId, String ruleDesc, Map<String, Object> details);
+	void insert(String type, String date, String ruleId, String ruleDesc, String eventId, String note);
 
 	/**
-	 * delete columns from event_timeline where type =? and day =? (and tuuid =?)
+	 * delete columns from event_timeline where type =? and date =? (and time_id =?)
 	 * if columns is Empty, delete all columns.
 	 * @param type
-	 * @param day
-	 * @param tuuidStr
+	 * @param date
+	 * @param time_id Str
 	 * @param columns
 	 */
-	void delete(String type, String day, String tuuidStr, String... columns);
+	void delete(String type, String date, String timeIdStr, String... columns);
 
 
 }

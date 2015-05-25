@@ -1,7 +1,7 @@
 /**
  * 
  */
-package io.github.homepy.meow.cql;
+package io.github.homepy.meow.cql.dao.impl;
 
 import static org.junit.Assert.*;
 
@@ -65,12 +65,12 @@ public class EventTimelineDaoTest {
 
 	@Test
 	public void insert() {
-		eventTimelineDao.insert("app", "20150101", null, null, null);
-		eventTimelineDao.insert("app", "20150102", "rule_id_1", "rule_desc_1", null);
-		eventTimelineDao.insert("app", "20150102", "rule_id_2", "rule_desc_2", null);
+		eventTimelineDao.insert("app", "20150101", null, null, null, null);
+		eventTimelineDao.insert("app", "20150102", "rule_id_1", "rule_desc_1", null, null);
+		eventTimelineDao.insert("app", "20150102", "rule_id_2", "rule_desc_2", null, null);
 		HashMap<String, Object> details = new HashMap<String, Object>();
 		details.put("key", "value");
-		eventTimelineDao.insert("app", "20150103", "rule_id_3", "rule_desc_3", details);
+		eventTimelineDao.insert("app", "20150103", "rule_id_3", "rule_desc_3", null, null);
 	}
 	
 	
@@ -83,23 +83,23 @@ public class EventTimelineDaoTest {
 		logger.debug("{}", list);
 		Assert.assertTrue(size == 0);
 		
-		eventTimelineDao.insert("app", "20150101", null, null, null);
-		eventTimelineDao.insert("app", "20150102", "rule_id_1", "rule_desc_1", null);
-		eventTimelineDao.insert("app", "20150102", "rule_id_2", "rule_desc_2", null);
+		eventTimelineDao.insert("app", "20150101", null, null, null, null);
+		eventTimelineDao.insert("app", "20150102", "rule_id_1", "rule_desc_1", null, null);
+		eventTimelineDao.insert("app", "20150102", "rule_id_2", "rule_desc_2", null, null);
 		HashMap<String, Object> details = new HashMap<String, Object>();
 		details.put("key", "value");
-		eventTimelineDao.insert("app", "20150102", "rule_id_3", "rule_desc_3", details);
-		eventTimelineDao.insert("app", "20150103", "rule_id_3", "rule_desc_3", details);
+		eventTimelineDao.insert("app", "20150102", "rule_id_3", "rule_desc_3", null, null);
+		eventTimelineDao.insert("app", "20150103", "rule_id_3", "rule_desc_3", null, null);
 		list = eventTimelineDao.query("app", "20150103", null, null, null);
 		size = list.size();
 		logger.debug("{}", list);
 		Assert.assertTrue(size == 1);
 	
 		Date start = new Date();
-		eventTimelineDao.insert("app", "20150103", "rule_id_4", "rule_desc_4", details);
-		eventTimelineDao.insert("app", "20150103", "rule_id_4", "rule_desc_4", details);
+		eventTimelineDao.insert("app", "20150103", "rule_id_4", "rule_desc_4", null, null);
+		eventTimelineDao.insert("app", "20150103", "rule_id_4", "rule_desc_4", null, null);
 		Date end = new Date();
-		list = eventTimelineDao.query("app", "20150103", null, start, end);
+		list = eventTimelineDao.query("app", "20150103", start, end, null);
 		logger.debug("{}", list);
 		size = list.size();
 		Assert.assertTrue(size == 2);
@@ -120,17 +120,17 @@ public class EventTimelineDaoTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void insertException1() {
-		eventTimelineDao.insert("app", null, null, null, null);
+		eventTimelineDao.insert("app", null, null, null, null, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void insertException2() {
-		eventTimelineDao.insert(null, "20150101", null, null, null);
+		eventTimelineDao.insert(null, "20150101", null, null, null, null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void insertException3() {
-		eventTimelineDao.insert(null, null, null, null, null);
+		eventTimelineDao.insert(null, null, null, null, null, null);
 	}
 
 }
