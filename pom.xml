@@ -5,7 +5,7 @@
 	<groupId>io.github.homepy.meow</groupId>
 	<artifactId>meow</artifactId>
 	<packaging>pom</packaging>
-	<version>0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>Maven Project 4 meow</name>
 
 	<scm>
@@ -331,10 +331,15 @@
 					<artifactId>maven-release-plugin</artifactId>
 					<version>2.5.2</version>
 					<configuration>
-						<!-- <tagBase>https://github.com/homepy/meow/tags</tagBase> -->
+						<tagBase>https://github.com/homepy/meow/tags</tagBase>
 						<tagNameFormat>v@{project.version}</tagNameFormat>
 					</configuration>
 				</plugin>
+				<plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>versions-maven-plugin</artifactId>
+      <version>2.2</version>
+      </plugin>
 			</plugins>
 
 		</pluginManagement>
