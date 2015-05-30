@@ -4,7 +4,7 @@
 	<groupId>io.github.homepy.meow</groupId>
 	<artifactId>meow</artifactId>
 	<packaging>pom</packaging>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.2</version>
 	<name>Maven Project 4 meow</name>
 
 	<scm>
