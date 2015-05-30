@@ -13,7 +13,7 @@
 		<connection>scm:git:git://github.com/homepy/meow.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com:homepy/meow.git</developerConnection>
 	</scm>
-	
+
 
 	<modules>
 		<module>meow-base</module>
@@ -25,6 +25,33 @@
 		<module>meow-hadoop</module>
 		<module>meow-jms</module>
 	</modules>
+
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<name>Nexus osc</name>
+			<url>http://maven.oschina.net/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus</id>
+			<name>Nexus osc</name>
+			<url>http://maven.oschina.net/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<!-- Shared version number properties -->
 	<properties>
@@ -305,7 +332,7 @@
 					<version>2.5.2</version>
 					<configuration>
 						<tagBase>https://github.com/homepy/meow/tags</tagBase>
-						<!--  <tagNameFormat>v@{project.version}</tagNameFormat>-->
+						<!-- <tagNameFormat>v@{project.version}</tagNameFormat> -->
 					</configuration>
 				</plugin>
 			</plugins>

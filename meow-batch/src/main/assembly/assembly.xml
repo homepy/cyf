@@ -13,7 +13,7 @@
 		<fileSet>
 			<outputDirectory>/</outputDirectory>
 			<includes>
-				<include>pom.xml</include>
+				<include>README.txt</include>
 			</includes>
 		</fileSet>
 		<fileSet>
