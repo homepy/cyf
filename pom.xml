@@ -4,14 +4,14 @@
 	<groupId>io.github.homepy.meow</groupId>
 	<artifactId>meow</artifactId>
 	<packaging>pom</packaging>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.2</version>
 	<name>Maven Project 4 meow</name>
 
 	<scm>
 		<url>https://github.com/homepy/meow</url>
 		<connection>scm:git:git://github.com/homepy/meow.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com:homepy/meow.git</developerConnection>
-	  <tag>v0.0.1</tag>
+	  <tag>v0.0.2</tag>
   </scm>
 
 
