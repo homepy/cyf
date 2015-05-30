@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.homepy.meow</groupId>
 	<artifactId>meow</artifactId>
@@ -11,8 +12,8 @@
 		<url>https://github.com/homepy/meow</url>
 		<connection>scm:git:git://github.com/homepy/meow.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com:homepy/meow.git</developerConnection>
-	  <tag>meow-0.0.1</tag>
-  </scm>
+		<tag>meow-0.0.1</tag>
+	</scm>
 
 
 	<modules>
@@ -55,6 +56,7 @@
 
 	<!-- Shared version number properties -->
 	<properties>
+		<project.scm.id>github</project.scm.id>
 		<org.springframework.version>3.2.13.RELEASE</org.springframework.version>
 		<org.aspectj.version>1.8.5</org.aspectj.version>
 		<org.slf4j.version>1.7.6</org.slf4j.version>
@@ -335,6 +337,7 @@
 						<!-- <tagNameFormat>v@{project.version}</tagNameFormat> -->
 					</configuration>
 				</plugin>
+
 			</plugins>
 
 		</pluginManagement>
