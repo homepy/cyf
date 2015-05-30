@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>io.github.homepy.meow</groupId>
 		<artifactId>meow</artifactId>
-		<version>0.0.2</version>
+		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>meow-storm</artifactId>
 	<name>meow-storm</name>
