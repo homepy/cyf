@@ -13,12 +13,12 @@
 	<bean id="builder1" factory-bean="builder0" factory-method="addContactPoint">
 		<constructor-arg name="address" value="192.168.1.100" />
 	</bean>
-	<bean id="builder" factory-bean="builder1" factory-method="withCredentials">
+	<bean id="builder2" factory-bean="builder1" factory-method="withCredentials">
 		<constructor-arg name="username" value="cassandra" />
 		<constructor-arg name="password" value="cassandra" />
 	</bean>
 	
-	<bean id="cluster" factory-bean="builder" factory-method="build" />
+	<bean id="cluster" factory-bean="builder2" factory-method="build" />
 	
 	<bean id="session" factory-bean="cluster" factory-method="connect" />
 	

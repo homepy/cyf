@@ -1,0 +1,5 @@
+mvn release:prepare
+mvn release:clean
+
+git add -A
+git commit -m ''

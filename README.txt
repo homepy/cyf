@@ -10,9 +10,12 @@ meow-jdbc, accessing relational database with JDBC, such as Spring JDBC, MyBatis
 
 meow-cassandra, accessing Apache Cassandra 2 with the Datastax CQL Java driver.
 
-meow-batch, scheduled task with Quartz, message driven bean with spring-jms and activeMQ.
+meow-batch, scheduled task with Quartz.
+
+meow-jms, message driven bean with spring-jms and activeMQ.
 
 meow-webapp, Web Application with Spring MVC, jQuery and Bootstrap.
+
 
 
 

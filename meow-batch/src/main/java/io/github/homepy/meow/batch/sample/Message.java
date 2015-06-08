@@ -1,0 +1,13 @@
+package io.github.homepy.meow.batch.sample;
+
+public class Message {
+	private String content;
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+}

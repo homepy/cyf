@@ -33,7 +33,7 @@ public class CqlUtils {
 
 	private static final Logger logger = LoggerFactory.getLogger(CqlUtils.class);
 
-	/**
+	/*
 	 * private static LoadBalancingPolicy loadBalancingPolicy;
 	 * The load balancing policy determines which node to execute a query on. By
 	 * default, the driver uses a round robin load balancing policy.
@@ -42,7 +42,7 @@ public class CqlUtils {
 	 */
 	 
 
-	/**
+	/*
 	 * private static ReconnectionPolicy reconnectionPolicy;
 	 * The reconnection policy determines how often a reconnection to a dead
 	 * node is attempted. By default, the driver uses an exponential
@@ -51,7 +51,7 @@ public class CqlUtils {
 	 */
 	
 
-	/**
+	/*
 	 * private static RetryPolicy retryPolicy;
 	 * The retry policy determines a default behavior to adopt when a request
 	 * either times out or if a node is unavailable. By default, the driver uses
@@ -61,22 +61,14 @@ public class CqlUtils {
 	 */
 	 
 
-	/**
+	/*
 	 * Connection options...
 	 * 
 	 * @return
 	 */
 
-	/**
-	 * 
-	 * @param contactPoints
-	 * @param loadBalancingPolicy
-	 * @param reconnectionPolicy
-	 * @param retryPolicy
-	 * @param username
-	 * @param password
-	 * @return
-	 */
+	
+	
 	public static Cluster buildCluster(List<InetSocketAddress> contactPoints, LoadBalancingPolicy loadBalancingPolicy,
 			ReconnectionPolicy reconnectionPolicy, RetryPolicy retryPolicy, String username, String password) {
 		Builder builder = null;

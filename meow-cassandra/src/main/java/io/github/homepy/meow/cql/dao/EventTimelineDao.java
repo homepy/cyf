@@ -7,35 +7,35 @@ import java.util.Map;
 public interface EventTimelineDao {
 
 	/**
-	 * 
-	 * @param type
-	 * @param date
-	 * @param limit
-	 * @param start
-	 * @param end
-	 * @return
+	 * Query Table
+	 * @param type key
+	 * @param date key
+	 * @param limit with limit
+	 * @param start where time_id gte start
+	 * @param end where time_id lte end
+	 * @return Result list
 	 */
 	List<Map<String, Object>> query(String type, String date,  Date start, Date end, Integer limit);
 
 
 	/**
-	 * 
-	 * @param type
-	 * @param date
-	 * @param ruleId
-	 * @param ruleDesc
-	 * @param eventId
-	 * @param note
+	 * Insert into table
+	 * @param type key
+	 * @param date key
+	 * @param ruleId column
+	 * @param ruleDesc column
+	 * @param eventId column
+	 * @param note column
 	 */
 	void insert(String type, String date, String ruleId, String ruleDesc, String eventId, String note);
 
 	/**
 	 * delete columns from event_timeline where type =? and date =? (and time_id =?)
 	 * if columns is Empty, delete all columns.
-	 * @param type
-	 * @param date
-	 * @param time_id Str
-	 * @param columns
+	 * @param type key
+	 * @param date key
+	 * @param timeIdStr String, clustering key, cound be null 
+	 * @param columns If null, delete all columns. Otherwise, delete these columns only.
 	 */
 	void delete(String type, String date, String timeIdStr, String... columns);
 
