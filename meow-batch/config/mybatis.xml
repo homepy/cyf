@@ -29,7 +29,7 @@
   </bean>
 
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-    <property name="basePackage" value="io.github.homepy.meow.mapper" />
+    <property name="basePackage" value="io.github.homepy.meow.mapper" /><!-- 接口 -->
     <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
   </bean>
 

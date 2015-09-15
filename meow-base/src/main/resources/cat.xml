@@ -16,7 +16,7 @@
 
   <update id="updateCat">
     update cat set name = #{name},color =
-    #{password},upd_name = #{updName} where name = #{name}
+    #{password},upd_name = #{updName} where name = #{name	}
   </update>
 
   <delete id="deleteCat">
