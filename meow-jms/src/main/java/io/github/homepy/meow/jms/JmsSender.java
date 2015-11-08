@@ -26,7 +26,7 @@ public class JmsSender {
 		this.destination = destination;
 	}
 
-	public void sendTextMessage(String text) {
+	public void sendTextMessage(final String text) {
 		logger.info("text ={}", text);
 		jmsTemplate.send(destination, new MessageCreator() {
 			public Message createMessage(Session session) throws JMSException {

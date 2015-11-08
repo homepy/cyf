@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 
 import com.datastax.driver.core.ConsistencyLevel;
 import com.datastax.driver.core.Session;
-import com.datastax.driver.core.querybuilder.Clause;
 import com.datastax.driver.core.querybuilder.QueryBuilder;
 
 import io.github.homepy.meow.cql.CqlUtils;

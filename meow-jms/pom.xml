@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -7,14 +7,17 @@
 		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>meow-jms</artifactId>
-	<name>meow-jms</name>
+	<name>meow-jms App</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 
-
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jms</artifactId>
@@ -23,13 +26,6 @@
 		<dependency>
 			<groupId>io.github.homepy.meow</groupId>
 			<artifactId>meow-base</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>io.github.homepy.meow</groupId>
-			<artifactId>meow-cassandra</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

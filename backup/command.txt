@@ -1,5 +1,10 @@
 mvn release:prepare
+mvn release:rollback
 mvn release:clean
+mvn release:perform
+
+
+mvn versions:set -DnewVersion=2.3-SNAPSHOP
 
 git add -A
 git commit -m ''
