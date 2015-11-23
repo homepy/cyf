@@ -28,10 +28,16 @@
 		<module>meow-base</module>
 		<module>meow-jdbc</module>
 		<module>meow-cassandra</module>
+		<module>meow-service</module>
 		<module>meow-webapp</module>
 		<module>meow-batch</module>
 		<module>meow-storm</module>
 		<module>meow-jms</module>
+		<module>meow-redis</module>
+		<module>meow-elasticsearch</module>
+
+		<module>meow-network</module>
+		<module>meow-server</module>
 	</modules>
 
 	<!-- Shared version number properties -->
@@ -44,15 +50,10 @@
 		<org.powermock.version>1.5.6</org.powermock.version>
 
 	</properties>
-
-	<repositories>
-		<repository>
-			<id>Liberty</id>
-			<name>Liberty Repository</name>
-			<url>http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/maven/repository/</url>
-		</repository>
-	</repositories>
-	<!-- <repositories> <repository> <id>nexus</id> <name>Nexus osc</name> <url>http://maven.oschina.net/content/groups/public/</url> 
+	<!-- <repositories> <repository> <id>Liberty</id> <name>Liberty Repository</name> 
+		<url>http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/maven/repository/</url> 
+		</repository> </repositories> <repositories> <repository> <id>nexus</id> 
+		<name>Nexus osc</name> <url>http://maven.oschina.net/content/groups/public/</url> 
 		<releases> <enabled>true</enabled> </releases> <snapshots> <enabled>false</enabled> 
 		</snapshots> </repository> </repositories> <pluginRepositories> <pluginRepository> 
 		<id>nexus</id> <name>Nexus osc</name> <url>http://maven.oschina.net/content/groups/public/</url> 
@@ -95,10 +96,26 @@
 				<artifactId>commons-io</artifactId>
 				<version>2.4</version>
 			</dependency>
+
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>1.2.7</version>
+			</dependency>
 			<dependency>
 				<groupId>org.elasticsearch</groupId>
 				<artifactId>elasticsearch</artifactId>
-				<version>1.3.9</version>
+				<version>1.7.3</version>
+			</dependency>
+			<dependency>
+				<groupId>redis.clients</groupId>
+				<artifactId>jedis</artifactId>
+				<version>2.7.3</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-redis</artifactId>
+				<version>1.6.0.RELEASE</version>
 			</dependency>
 			<dependency>
 				<groupId>org.aspectj</groupId>
@@ -260,49 +277,18 @@
 			<version>1.1.1</version>
 			<scope>provided</scope>
 		</dependency>
-
-
-		<dependency>
-			<groupId>org.easymock</groupId>
-			<artifactId>easymock</artifactId>
-			<version>3.2</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-module-junit4</artifactId>
-			<version>${org.powermock.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-api-mockito</artifactId>
-			<version>${org.powermock.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-core</artifactId>
-			<version>${org.powermock.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-api-easymock</artifactId>
-			<version>${org.powermock.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.powermock.tests</groupId>
-			<artifactId>powermock-tests-utils</artifactId>
-			<version>${org.powermock.version}</version>
-			<scope>test</scope>
-		</dependency>
-
+		<!-- <dependency> <groupId>org.easymock</groupId> <artifactId>easymock</artifactId> 
+			<version>3.2</version> <scope>test</scope> </dependency> <dependency> <groupId>org.powermock</groupId> 
+			<artifactId>powermock-module-junit4</artifactId> <version>${org.powermock.version}</version> 
+			<scope>test</scope> </dependency> <dependency> <groupId>org.powermock</groupId> 
+			<artifactId>powermock-api-mockito</artifactId> <version>${org.powermock.version}</version> 
+			<scope>test</scope> </dependency> <dependency> <groupId>org.powermock</groupId> 
+			<artifactId>powermock-core</artifactId> <version>${org.powermock.version}</version> 
+			<scope>test</scope> </dependency> <dependency> <groupId>org.powermock</groupId> 
+			<artifactId>powermock-api-easymock</artifactId> <version>${org.powermock.version}</version> 
+			<scope>test</scope> </dependency> <dependency> <groupId>org.powermock.tests</groupId> 
+			<artifactId>powermock-tests-utils</artifactId> <version>${org.powermock.version}</version> 
+			<scope>test</scope> </dependency> -->
 	</dependencies>
 
 	<build>
@@ -339,8 +325,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.2</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -383,6 +369,10 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
 				<version>3.0.2</version>
+				<configuration>
+					<!-- <threshold>High</threshold> <effort>Default</effort> -->
+					<findbugsXmlOutput>true</findbugsXmlOutput>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

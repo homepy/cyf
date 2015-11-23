@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.github.homepy.meow.mapper.CatMapper">
+<mapper namespace="io.github.homepy.meow.jdbc.mybatis.CatMapper">
   <select id="selectCat" resultType="io.github.homepy.meow.pojo.Cat">
     select * from cat where name
     = #{name}

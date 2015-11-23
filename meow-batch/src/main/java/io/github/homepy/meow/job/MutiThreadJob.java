@@ -2,15 +2,16 @@ package io.github.homepy.meow.job;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.Assert;
+
+import com.google.common.base.Preconditions;
 
 import io.github.homepy.meow.pojo.Cat;
 import io.github.homepy.meow.task.CallableTask;
@@ -21,7 +22,7 @@ public class MutiThreadJob {
 	private final int threadSize;
 
 	public MutiThreadJob(Integer threadSize) {
-		Assert.isTrue(threadSize > 0);
+		Preconditions.checkArgument(threadSize > 0);
 		this.threadSize = threadSize;
 	}
 
@@ -42,7 +43,7 @@ public class MutiThreadJob {
 			try {
 				// get() blocks until completion:
 				log.info("Hello, here is {}.",
-						ObjectUtils.toString(fs.get(), "null"));
+						Objects.toString(fs.get(), "null"));
 
 			} catch (InterruptedException e) {
 				log.error("", e);
