@@ -299,9 +299,13 @@
 					<version>2.7</version>
 				</plugin>
 				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				<plugin>
 					<groupId>org.apache.tomcat.maven</groupId>
 					<artifactId>tomcat7-maven-plugin</artifactId>
-					<!-- or if you want to use tomcat 6.x <artifactId>tomcat6-maven-plugin</artifactId> -->
 					<version>2.2</version>
 				</plugin>
 				<plugin>
@@ -330,16 +334,8 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.4</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
+				<!-- <executions> <execution> <id>attach-sources</id> <phase>verify</phase> 
+					<goals> <goal>jar-no-fork</goal> </goals> </execution> </executions> -->
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -361,15 +357,6 @@
 				<version>2.18</version>
 				<configuration>
 					<argLine>-Xmx512m -XX:MaxPermSize=256m</argLine>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>3.0.2</version>
-				<configuration>
-					<!-- <threshold>High</threshold> <effort>Default</effort> -->
-					<findbugsXmlOutput>true</findbugsXmlOutput>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -448,7 +435,7 @@
 						<id>aggregate</id>
 						<inherited>false</inherited>
 						<reports>
-							<report>aggregate</report>
+							<report>checkstyle-aggregate</report>
 						</reports>
 					</reportSet>
 				</reportSets>
@@ -478,7 +465,16 @@
 					</reportSet>
 				</reportSets>
 			</plugin>
-
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>3.0.3</version>
+				<configuration>
+					<xmlOutput>true</xmlOutput>
+					<!-- Optional directory to put findbugs xdoc xml report -->
+					<xmlOutputDirectory>target/site</xmlOutputDirectory>
+				</configuration>
+			</plugin>
 		</plugins>
 	</reporting>
 </project>
