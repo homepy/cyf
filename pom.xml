@@ -35,9 +35,7 @@
 		<module>meow-jms</module>
 		<module>meow-redis</module>
 		<module>meow-elasticsearch</module>
-
-		<module>meow-network</module>
-		<module>meow-server</module>
+		<module>meow-net</module>
 	</modules>
 
 	<!-- Shared version number properties -->
